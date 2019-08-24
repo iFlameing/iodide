@@ -1,14 +1,4 @@
-import { configure, addParameters } from "@storybook/react";
-
-addParameters({
-  options: {
-    /**
-     * display panel that shows addon configurations
-     * @type {Boolean}
-     */
-    showPanel: false
-  }
-});
+import { configure } from "@storybook/react";
 
 // automatically import all files ending in *.stories.js
 const req = require.context("../src", true, /\.stories\.js$/);

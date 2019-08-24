@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "react-emotion";
 
+import DropTarget from "../../../../shared/components/drop-target";
 import AddButton from "./add-button";
 import NoFilesNotice from "./no-files-notice";
 import FileList from "./file-list";
@@ -27,6 +28,15 @@ const Body = styled.div`
   padding: ${bodyPadding};
 `;
 
+const DropTargetContent = styled.div`
+  align-content: center;
+  align-items: center;
+  display: grid;
+  grid-gap: ${defaultSpacing};
+  justify-content: center;
+  justify-items: center;
+`;
+
 export default class extends React.Component {
   static propTypes = {
     files: PropTypes.objectOf(PropTypes.shape(fileShape)).isRequired,
@@ -43,23 +53,26 @@ export default class extends React.Component {
   };
 
   render = () => (
-    <React.Fragment>
-      <BodyWrapper>
-        <Body>
-          <AddButton onAddButtonClick={this.props.onAddButtonClick} />
-          {this.hasVisibleFiles() ? (
-            <React.Fragment>
-              <FileList
-                files={this.props.files}
-                confirmDelete={this.props.confirmDelete}
-              />
-              <Footer />
-            </React.Fragment>
-          ) : (
-            <NoFilesNotice />
-          )}
-        </Body>
-      </BodyWrapper>
-    </React.Fragment>
+    <BodyWrapper>
+      <Body>
+        <DropTarget>
+          <DropTargetContent>
+            <AddButton onAddButtonClick={this.props.onAddButtonClick} />
+            <span>or drag and drop files here</span>
+          </DropTargetContent>
+        </DropTarget>
+        {this.hasVisibleFiles() ? (
+          <React.Fragment>
+            <FileList
+              files={this.props.files}
+              confirmDelete={this.props.confirmDelete}
+            />
+            <Footer />
+          </React.Fragment>
+        ) : (
+          <NoFilesNotice />
+        )}
+      </Body>
+    </BodyWrapper>
   );
 }
