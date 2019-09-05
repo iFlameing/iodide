@@ -28,7 +28,7 @@ class BaseContentFile(BaseFile):
     content = models.BinaryField(max_length=MAX_FILE_SIZE)
 
     class Meta(BaseFile.Meta):
-        pass
+        abstract = True
 
 
 class File(BaseContentFile):
