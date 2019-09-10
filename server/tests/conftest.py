@@ -10,6 +10,14 @@ from server.notebooks.models import Notebook, NotebookRevision
 pytest_plugins = ["server.tests.plugins.lean", "server.tests.plugins.staticfiles"]
 
 
+def pytest_configure(config):
+    # work-around for https://github.com/ktosiek/pytest-freezegun/issues/13
+    config.addinivalue_line(
+        "markers",
+        "freeze_time(timestamp): freeze time to the given timestamp for the duration of the test.",
+    )
+
+
 @pytest.fixture
 def api_client():
     """
