@@ -1,6 +1,4 @@
 import datetime
-import os
-import sys
 
 import pytest
 from rest_framework.test import APIClient
@@ -9,7 +7,7 @@ from server.base.models import User
 from server.files.models import File, FileSource
 from server.notebooks.models import Notebook, NotebookRevision
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "helpers"))
+pytest_plugins = ["server.tests.plugins.lean", "server.tests.plugins.staticfiles"]
 
 
 @pytest.fixture
