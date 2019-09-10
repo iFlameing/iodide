@@ -10,6 +10,7 @@ class BaseFile(models.Model):
     """
     The abstract base model for files
     """
+
     notebook = models.ForeignKey(Notebook, on_delete=models.CASCADE)
     # FIXME: add a validator for filename (for minimum length and maybe
     # other things)
@@ -35,6 +36,7 @@ class File(BaseContentFile):
     """
     Represents a file saved on the server
     """
+
     last_updated = models.DateTimeField(auto_now=True)
 
     class Meta(BaseContentFile.Meta):
